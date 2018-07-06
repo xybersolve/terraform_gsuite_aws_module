@@ -6,11 +6,11 @@ email service for domain. Also, maps Google apps as subdomains.
 
 Module Input Variables
 ----------------------
-- `dns_host_name`:
-- `host_name`:
-- `ttl`:
-- `gsuite-id`:
-- `gsuite-apps`:
+- `dns_domain_name`: Corporate DNS domain name
+- `host_name`: Name of host record, if other than corporate DNS
+- `ttl`: Time to Live on new records
+- `gsuite-id`: Google provided gsuite identifier
+- `gsuite-apps`: Apps to map to subdomains [docs, cal, drive, etc]
 
 Notes
 -----
@@ -26,12 +26,11 @@ A simple example to create AWS DNS records for `mydomain.com`.
 
 module "gsuite" {
   source = "github.com/xybersolve/terraform_gsuite_aws_module"
-  # source = "../../../modules/services/gsuite"
-  gsuite-apps = ["mail", "cal", "docs"]
-  host_name = "mydomain.com"
   dns_domain_name = "mydomain.com"
-  gsuite-id = "google-site-verification=<gsuite supplied id>"
+  host_name = "mydomain.com"
   ttl = "3600"
+  gsuite-id = "google-site-verification=<gsuite supplied id>"
+  gsuite-apps = ["mail", "cal", "docs"]
 }
 
 
